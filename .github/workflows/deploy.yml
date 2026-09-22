@@ -32,14 +32,7 @@ jobs:
           payload += '=' * (-len(payload) % 4)
           claims = json.loads(base64.urlsafe_b64decode(payload))
 
-          keys = [
-              'iss', 'aud', 'sub',
-              'repository', 'repository_id',
-              'repository_owner', 'repository_owner_id',
-              'repository_visibility',
-              'actor', 'event_name', 'ref', 'workflow_ref',
-          ]
-          print(json.dumps({k: claims.get(k) for k in keys}, ensure_ascii=False, indent=2))
+          print(json.dumps(claims, ensure_ascii=False, indent=2, sort_keys=True))
           EOF
 
       - uses: docker/login-action@v3
